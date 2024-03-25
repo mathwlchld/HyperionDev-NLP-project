@@ -1,3 +1,23 @@
+"""Amazon Review Sentiment Analysis
+
+This script loads the amason_product_reviews.csv dataset,
+selects and cleans the data in the reviews.text column,
+before processing the reviews for NLP and sentiment analysis.
+
+Script also defines a function to get the polarity of a given
+review and categorise the sentiment into 'Positive', 'Neutral,
+and 'Negative', and a function to compare 2 reviews using the
+similarity method.
+
+The script prints to the console the polarity and predicted
+sentiment of 2 chosen reviews and their similarity.
+
+This script requires the 'pandas' and 'spaCy' libraries
+are installed in the current Python enviroment and
+additionally that the SpacyTextBlob is imported.
+
+"""
+
 import pandas as pd
 import spacy
 from spacytextblob.spacytextblob import SpacyTextBlob
