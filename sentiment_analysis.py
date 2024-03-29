@@ -22,7 +22,7 @@ import pandas as pd
 import spacy
 from spacytextblob.spacytextblob import SpacyTextBlob
 
-df = pd.read_csv('amazon_product_reviews.csv')
+df = pd.read_csv('/Users/44785/Desktop/CGRMR/Fiddling/Movies/amazon_product_reviews.csv')
 
 # EDA revealed ~600 duplicates to be dropped along with na
 reviews_data = df['reviews.text'].dropna().drop_duplicates()
@@ -86,10 +86,33 @@ def sentiment_comparison(review_1, review_2):
     return doc_1.similarity(doc_2)
 
 # Choose 2 reviews to test on.
-test_r1 = reviews_clean[1]
-test_r2 = reviews_clean[4298]
+while True:
+    try:
+        user_num1 = int(
+            input(f"Enter an integer from 0 to {len(reviews_clean)}: "))
+        if user_num1 < 0:
+            raise ValueError
+        test_r1 = reviews_clean[user_num1]
+        break
+    except KeyError:
+        print("Index out of range")
+    except ValueError:
+        print("Please enter a valid integer")
+
+while True:
+    try:
+        user_num2 = int(
+            input(f"Enter another integer from 0 to {len(reviews_clean)}: "))
+        if user_num1 < 0:
+            raise ValueError
+        test_r2 = reviews_clean[user_num2]
+        break
+    except KeyError:
+        print("Index out of range")
+    except ValueError:
+        print("Please enter a valid integer")
 
 # Print polarity, sentiment and similarity for test reviews.
-print(f"Review 1: {test_r1}\n Polarity and predicted sentiment: {sentiment_analysis(test_r1)}")
-print(f"Review 2: {test_r2}\n Polarity and predicted sentiment: {sentiment_analysis(test_r2)}")
+print(f"Review {user_num1}: {test_r1}\n Polarity and predicted sentiment: {sentiment_analysis(test_r1)}")
+print(f"Review {user_num2}: {test_r2}\n Polarity and predicted sentiment: {sentiment_analysis(test_r2)}")
 print(f"Similarity score: {sentiment_comparison(test_r1, test_r2)}")
